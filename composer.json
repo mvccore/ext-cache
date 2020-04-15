@@ -1,0 +1,29 @@
+{
+	"name": "mvccore/ext-cache",
+	"type": "library",
+	"description": "MvcCore - Extension - Cache - register and use cache instances, cache interface.",
+	"keywords": [
+		"mvc", 
+		"mvccore", 
+		"framework", 
+		"extension", 
+		"plugin", 
+		"plug-in", 
+		"ext", 
+		"cache", 
+		"store",
+		"interface"
+	],
+	"license": ["BSD-3-Clause"],
+	"authors": [{
+		"name": "Tom Flidr",
+		"homepage": "https://github.com/tomFlidr"
+	}],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"minimum-stability": "dev"
+}
