@@ -52,6 +52,7 @@ interface ICache
 	const TAG_PREFIX			= 'cache.tag.';
 
 	/**
+	 * Create or get cached redis cache wrapper instance.
 	 * @param string|array|NULL $connectionArguments...
 	 * If string, it's used as connection name.
 	 * If array, it's used as connection config array with keys:
@@ -65,6 +66,13 @@ interface ICache
 	 * @return \MvcCore\Ext\ICache
 	 */
 	public static function GetInstance (/*...$connectionNameOrArguments = NULL*/);
+
+	/**
+	 * Connect to redis server by configuration given in constructor.
+	 * Return boolean about connection success (not about cache enabled or disabled).
+	 * @return bool
+	 */
+	public function Connect ();
 
 	/**
 	 * Get resource instance.
