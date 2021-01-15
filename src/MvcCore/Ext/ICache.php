@@ -7,45 +7,45 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
  * @license  https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext;
 
-interface ICache
-{
-    /**
-     * Connection `name` key for constructor configuration array.
-	 * @var string
-     */
-    const CONNECTION_NAME		= 'name';
+interface ICache {
 
-    /**
+	/**
+	 * Connection `name` key for constructor configuration array.
+	 * @var string
+	 */
+	const CONNECTION_NAME		= 'name';
+
+	/**
 	 * Connection `host` key for constructor configuration array.
 	 * @var string
 	 */
 	const CONNECTION_HOST		= 'host';
 
-    /**
+	/**
 	 * Connection `port` key for constructor configuration array.
 	 * @var string
 	 */
 	const CONNECTION_PORT		= 'port';
 
-    /**
+	/**
 	 * Connection `database` name key for constructor configuration array.
 	 * @var string
 	 */
 	const CONNECTION_DATABASE	= 'database';
 
-    /**
+	/**
 	 * Connection `timeout` key for constructor configuration array.
 	 * @var string
 	 */
 	const CONNECTION_TIMEOUT	= 'timeout';
 
-    /**
+	/**
 	 * Cache tag records prefix: `cache.tag.`.
 	 * @var string
 	 */
@@ -63,7 +63,7 @@ interface ICache
 	 *  - `timeout`		default: NULL
 	 *  If NULL, there is returned `default` connection
 	 *  name with default initial configuration values.
-	 * @return \MvcCore\Ext\ICache
+	 * @return \MvcCore\Ext\Cache
 	 */
 	public static function GetInstance (/*...$connectionNameOrArguments = NULL*/);
 
@@ -83,7 +83,7 @@ interface ICache
 	/**
 	 * Set resource instance.
 	 * @param resource|object $resource
-	 * @return \MvcCore\Ext\ICache
+	 * @return \MvcCore\Ext\Cache
 	 */
 	public function SetResource ($resource);
 
@@ -96,7 +96,7 @@ interface ICache
 	/**
 	 * Enable/disable cache component.
 	 * @param bool $enable
-	 * @return \MvcCore\Ext\ICache
+	 * @return \MvcCore\Ext\Cache
 	 */
 	public function SetEnabled ($enabled);
 

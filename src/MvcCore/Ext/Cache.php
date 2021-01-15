@@ -7,37 +7,37 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
  * @license  https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext;
 
-class Cache
-{
+class Cache {
+
 	/**
 	 * MvcCore Extension - Form - version:
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.0.0-alpha';
+	const VERSION = '5.0.0';
 
 	/**
-	 * Keys are store names, values are instances of `\MvcCore\Ext\ICache`.
+	 * Keys are store names, values are instances of `\MvcCore\Ext\Cache`.
 	 * @var array
 	 */
 	protected static $stores = [];
 
 	/**
 	 * Default store.
-	 * @var \MvcCore\Ext\ICache|NULL
+	 * @var \MvcCore\Ext\Cache|NULL
 	 */
 	protected static $default = NULL;
 
 	/**
 	 * Get store by name or get store registered as default.
 	 * @param string|NULL $name
-	 * @return \MvcCore\Ext\ICache|NULL
+	 * @return \MvcCore\Ext\Cache|NULL
 	 */
 	public static function GetStore ($name = NULL) {
 		if (isset(static::$stores[$name]))
@@ -48,9 +48,9 @@ class Cache
 	/**
 	 * Register cache store implementing `\MvcCore\Ext\ICache`.
 	 * It could be file storage, redis storage, memcached storrage, etc...
-	 * @param string              $name
-	 * @param \MvcCore\Ext\ICache $store
-	 * @param bool                $default
+	 * @param string				$name
+	 * @param \MvcCore\Ext\Cache	$store
+	 * @param bool					$default
 	 */
 	public static function RegisterStore ($name, \MvcCore\Ext\ICache $store, $asDefault = FALSE) {
 		static::$stores[$name] = $store;
