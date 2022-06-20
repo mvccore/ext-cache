@@ -53,7 +53,7 @@ interface ICache {
 
 	/**
 	 * Create or get cached redis cache wrapper instance.
-	 * @param string|array|NULL $connectionArguments...
+	 * @param  string|array|NULL $connectionArguments...
 	 * If string, it's used as connection name.
 	 * If array, it's used as connection config array with keys:
 	 *  - `name`		default: 'default'
@@ -82,7 +82,7 @@ interface ICache {
 
 	/**
 	 * Set resource instance.
-	 * @param resource|object $resource
+	 * @param  resource|object $resource
 	 * @return \MvcCore\Ext\Cache
 	 */
 	public function SetResource ($resource);
@@ -95,7 +95,7 @@ interface ICache {
 
 	/**
 	 * Enable/disable cache component.
-	 * @param bool $enable
+	 * @param  bool $enable
 	 * @return \MvcCore\Ext\Cache
 	 */
 	public function SetEnabled ($enabled);
@@ -108,26 +108,26 @@ interface ICache {
 
 	/**
 	 * Process given operations in transaction mode.
-	 * @param array $ops Keys are client functions names, values are functions arguments.
+	 * @param  array $ops Keys are client functions names, values are functions arguments.
 	 * @return array
 	 */
 	public function ProcessTransaction (array $ops = []);
 
 	/**
 	 * Set content under key with seconds expiration and tag(s).
-	 * @param string $key
-	 * @param mixed $content
-	 * @param int $expirationSeconds
-	 * @param array $cacheTags
+	 * @param  string   $key
+	 * @param  mixed    $content
+	 * @param  int|NULL $expirationSeconds
+	 * @param  array    $cacheTags
 	 * @return bool
 	 */
 	public function Save ($key, $content, $expirationSeconds = NULL, $cacheTags = []);
 
 	/**
 	 * Set multiple contents under keys with seconds expirations and tags.
-	 * @param array $keysAndContents
-	 * @param int $expirationSeconds
-	 * @param array $cacheTags
+	 * @param  array    $keysAndContents
+	 * @param  int|NULL $expirationSeconds
+	 * @param  array    $cacheTags
 	 * @return bool
 	 */
 	public function SaveMultiple ($keysAndContents, $expirationSeconds = NULL, $cacheTags = []);
@@ -135,52 +135,52 @@ interface ICache {
 	/**
 	 * Return mixed content from cache by key or return `NULL` if content doens't
 	 * exist in cache for given key.
-	 * @param string $key
-	 * @param callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
+	 * @param  string        $key
+	 * @param  callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
 	 * @return mixed|NULL
 	 */
 	public function Load ($key, callable $notFoundCallback = NULL);
 
 	/**
 	 * Get content by key.
-	 * @param \string[] $keys
-	 * @param callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
+	 * @param  \string[]     $keys
+	 * @param  callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
 	 * @return mixed|NULL
 	 */
 	public function LoadMultiple (array $keys, callable $notFoundCallback = NULL);
 
 	/**
 	 * Delete cache record by key.
-	 * @param string $key
+	 * @param  string $key
 	 * @return bool
 	 */
 	public function Delete ($key);
 
 	/**
 	 * Delete cache record(s) by key(s).
-	 * @param array $keys
-	 * @param array $keysTags
+	 * @param  array $keys
+	 * @param  array $keysTags
 	 * @return int
 	 */
 	public function DeleteMultiple (array $keys, array $keysTags = []);
 
 	/**
 	 * Delete cache record by key.
-	 * @param string|array $tags
+	 * @param  string|array $tags
 	 * @return int
 	 */
 	public function DeleteByTags ($tags);
 
 	/**
 	 * Return `1` if cache has any record under given key, `0` if not.
-	 * @param string $key
+	 * @param  string $key
 	 * @return int
 	 */
 	public function Has ($key);
 
 	/**
 	 * Return `1` if cache has any record under given key, `0` if not.
-	 * @param string $key
+	 * @param  string $key
 	 * @return int
 	 */
 	public function HasMultiple ($keys);
