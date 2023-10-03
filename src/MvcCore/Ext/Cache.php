@@ -20,7 +20,7 @@ class Cache {
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.0.0';
+	const VERSION = '5.2.0';
 
 	/**
 	 * Keys are store names, values are instances of `\MvcCore\Ext\Cache`.
@@ -42,7 +42,10 @@ class Cache {
 	public static function GetStore ($name = NULL) {
 		if (isset(static::$stores[$name]))
 			return static::$stores[$name];
-		return static::$default;
+		if (static::$default !== NULL)
+			return static::$default;
+		$storeKeys = array_keys(static::$stores);
+		return static::$stores[$storeKeys[0]];
 	}
 
 	/**

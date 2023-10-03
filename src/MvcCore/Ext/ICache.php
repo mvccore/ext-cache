@@ -34,16 +34,28 @@ interface ICache {
 	const CONNECTION_PORT		= 'port';
 
 	/**
+	 * Connection `persistence` name key for constructor configuration array.
+	 * @var string
+	 */
+	const CONNECTION_PERSISTENCE= 'persistence';
+
+	/**
 	 * Connection `database` name key for constructor configuration array.
 	 * @var string
 	 */
 	const CONNECTION_DATABASE	= 'database';
 
 	/**
-	 * Connection `timeout` key for constructor configuration array.
+	 * Connection `timeout` key for constructor configuration array, in miliseconds (1s = 1000ms).
 	 * @var string
 	 */
 	const CONNECTION_TIMEOUT	= 'timeout';
+
+	/**
+	 * Connection `provider` key for constructor configuration array.
+	 * @var string
+	 */
+	const PROVIDER_CONFIG		= 'provider';
 
 	/**
 	 * Cache tag records prefix: `cache.tag.`.
@@ -52,7 +64,7 @@ interface ICache {
 	const TAG_PREFIX			= 'cache.tag.';
 
 	/**
-	 * Create or get cached redis cache wrapper instance.
+	 * Create or get cached cache wrapper instance.
 	 * @param  string|array|NULL $connectionArguments...
 	 * If string, it's used as connection name.
 	 * If array, it's used as connection config array with keys:
@@ -60,10 +72,10 @@ interface ICache {
 	 *  - `host`		default: '127.0.0.1'
 	 *  - `port`		default: depends on implementation
 	 *  - `database`	default: $_SERVER['SERVER_NAME']
-	 *  - `timeout`		default: NULL
+	 *  - `timeout`		default: NULL, in miliseconds (1s = 1000ms)
 	 *  If NULL, there is returned `default` connection
 	 *  name with default initial configuration values.
-	 * @return \MvcCore\Ext\Cache
+	 * @return \MvcCore\Ext\Caches\Base
 	 */
 	public static function GetInstance (/*...$connectionNameOrArguments = NULL*/);
 
@@ -75,17 +87,17 @@ interface ICache {
 	public function Connect ();
 
 	/**
-	 * Get resource instance.
-	 * @return resource|object|NULL
+	 * Get provider instance.
+	 * @return object|NULL
 	 */
-	public function GetResource ();
+	public function GetProvider();
 
 	/**
-	 * Set resource instance.
-	 * @param  resource|object $resource
-	 * @return \MvcCore\Ext\Cache
+	 * Set provider instance.
+	 * @param  object|NULL $provider
+	 * @return \MvcCore\Ext\Caches\Base
 	 */
-	public function SetResource ($resource);
+	public function SetProvider ($provider);
 
 	/**
 	 * Return initial configuration data.
@@ -94,24 +106,17 @@ interface ICache {
 	public function GetConfig ();
 
 	/**
-	 * Enable/disable cache component.
+	 * Enable/disable cache wrapper.
 	 * @param  bool $enable
-	 * @return \MvcCore\Ext\Cache
+	 * @return \MvcCore\Ext\Caches\Base
 	 */
 	public function SetEnabled ($enabled);
 
 	/**
-	 * Get if cache component is enabled/disabled.
+	 * Get if cache wrapper is enabled/disabled.
 	 * @return bool
 	 */
 	public function GetEnabled ();
-
-	/**
-	 * Process given operations in transaction mode.
-	 * @param  array $ops Keys are client functions names, values are functions arguments.
-	 * @return array
-	 */
-	public function ProcessTransaction (array $ops = []);
 
 	/**
 	 * Set content under key with seconds expiration and tag(s).
@@ -145,7 +150,7 @@ interface ICache {
 	 * Get content by key.
 	 * @param  \string[]     $keys
 	 * @param  callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
-	 * @return mixed|NULL
+	 * @return array|NULL
 	 */
 	public function LoadMultiple (array $keys, callable $notFoundCallback = NULL);
 
@@ -174,13 +179,13 @@ interface ICache {
 	/**
 	 * Return `1` if cache has any record under given key, `0` if not.
 	 * @param  string $key
-	 * @return int
+	 * @return bool
 	 */
 	public function Has ($key);
 
 	/**
 	 * Return `1` if cache has any record under given key, `0` if not.
-	 * @param  string $key
+	 * @param  string|\string[] $keys
 	 * @return int
 	 */
 	public function HasMultiple ($keys);
