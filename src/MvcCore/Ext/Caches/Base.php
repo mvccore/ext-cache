@@ -62,7 +62,7 @@ class Base {
 				$config = $arg;
 			} else if ($arg !== NULL) {
 				throw new \InvalidArgumentException(
-					"[".get_class()."] Cache instance getter argument could be ".
+					"[".get_called_class()."] Cache instance getter argument could be ".
 					"only a string connection name or connection config array."
 				);
 			}
