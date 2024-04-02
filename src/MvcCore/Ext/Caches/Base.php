@@ -150,11 +150,17 @@ class Base {
 	 * @return void
 	 */
 	protected function exceptionHandler ($e) {
-		if ($this->application->GetEnvironment()->IsDevelopment()) {
-			throw $e;
+		$env = $this->application->GetEnvironment();
+		if (!$env->IsDetected()) { // cache cannot trigger environment detection.
+			// we don't wont to send anything to user, only to catch it by `error_get_last()`
+			@user_error($e->getMessage(), E_USER_NOTICE);
 		} else {
-			$debugClass = $this->application->GetDebugClass();
-			$debugClass::Log($e);
+			if ($env->IsDevelopment()) {
+				throw $e;
+			} else {
+				$debugClass = $this->application->GetDebugClass();
+				$debugClass::Log($e);
+			}
 		}
 	}
 
