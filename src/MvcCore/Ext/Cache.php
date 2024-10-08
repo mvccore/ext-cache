@@ -20,7 +20,7 @@ class Cache {
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.2.2';
+	const VERSION = '5.2.3';
 
 	/**
 	 * Keys are store names, values are instances of `\MvcCore\Ext\Cache`.
