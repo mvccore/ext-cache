@@ -142,17 +142,19 @@ interface ICache {
 	 * exist in cache for given key.
 	 * @param  string        $key
 	 * @param  callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
+	 * @throws \Exception    Not found callback is not callable.
 	 * @return mixed|NULL
 	 */
-	public function Load ($key, callable $notFoundCallback = NULL);
+	public function Load ($key, $notFoundCallback = NULL);
 
 	/**
 	 * Get content by key.
 	 * @param  \string[]     $keys
 	 * @param  callable|NULL $notFoundCallback function ($cache, $cacheKey) { ... $cache->Save($cacheKey, $data); return $data; }
+	 * @throws \Exception    Not found callback is not callable.
 	 * @return array|NULL
 	 */
-	public function LoadMultiple (array $keys, callable $notFoundCallback = NULL);
+	public function LoadMultiple (array $keys, $notFoundCallback = NULL);
 
 	/**
 	 * Delete cache record by key.
