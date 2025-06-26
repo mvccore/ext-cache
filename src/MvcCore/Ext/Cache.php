@@ -52,7 +52,7 @@ class Cache {
 	 * Register cache store implementing `\MvcCore\Ext\ICache`.
 	 * It could be file storage, redis storage, memcached storrage, etc...
 	 * @param string				$name
-	 * @param \MvcCore\Ext\Cache	$store
+	 * @param \MvcCore\Ext\ICache	$store
 	 * @param bool					$default
 	 */
 	public static function RegisterStore ($name, \MvcCore\Ext\ICache $store, $asDefault = FALSE) {
