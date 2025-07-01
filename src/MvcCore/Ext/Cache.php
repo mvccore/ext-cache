@@ -30,14 +30,14 @@ class Cache {
 
 	/**
 	 * Default store.
-	 * @var \MvcCore\Ext\Cache|NULL
+	 * @var \MvcCore\Ext\ICache|NULL
 	 */
 	protected static $default = NULL;
 
 	/**
 	 * Get store by name or get store registered as default.
 	 * @param string|NULL $name
-	 * @return \MvcCore\Ext\Cache|NULL
+	 * @return \MvcCore\Ext\ICache|NULL
 	 */
 	public static function GetStore ($name = NULL) {
 		if (isset(static::$stores[$name]))
